@@ -1,0 +1,249 @@
+openapi: 3.0.0
+info:
+  title: Customs API
+  version: 1.0.0
+  description: |
+    Manage customs broker customers and their branches.
+    Provides CRUD on customers & branches, plus branch‐count stats.
+servers:
+  - url: http://localhost:5000
+paths:
+  /customers:
+    post:
+      summary: Add a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+      responses:
+        '201':
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    get:
+      summary: List all customers with their branches
+      responses:
+        '200':
+          description: Array of customers with nested branches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerWithBranches'
+
+  /customers/{customerId}:
+    parameters:
+      - in: path
+        name: customerId
+        required: true
+        schema:
+          type: string
+          example: 64c8ab1234567890abcdef01
+    get:
+      summary: Get one customer (no branches)
+      responses:
+        '200':
+          description: Customer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    put:
+      summary: Update a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+      responses:
+        '200':
+          description: Updated customer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    delete:
+      summary: Delete a customer
+      responses:
+        '200':
+          description: Deletion confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /customers/{customerId}/branch-count:
+    get:
+      summary: Get branch count for one customer
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Number of branches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchCount'
+
+  /customers/branch-counts:
+    get:
+      summary: Get branch counts for all customers
+      responses:
+        '200':
+          description: Array of customers with branch counts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BranchCountFull'
+
+  /branches:
+    post:
+      summary: Add a new branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchInput'
+      responses:
+        '201':
+          description: Branch created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+    get:
+      summary: List branches (optionally filter by customerId)
+      parameters:
+        - in: query
+          name: customerId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of branch objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Branch'
+
+  /branches/{branchId}:
+    parameters:
+      - in: path
+        name: branchId
+        required: true
+        schema:
+          type: string
+    put:
+      summary: Update a branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchInput'
+      responses:
+        '200':
+          description: Updated branch object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+    delete:
+      summary: Delete a branch
+      responses:
+        '200':
+          description: Deletion confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        gstin:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    CustomerInput:
+      type: object
+      required: [name, email, gstin]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        gstin:
+          type: string
+    Branch:
+      type: object
+      properties:
+        _id:
+          type: string
+        branch_code:
+          type: string
+        location:
+          type: string
+        customerId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    BranchInput:
+      type: object
+      required: [branch_code, location, customerId]
+      properties:
+        branch_code:
+          type: string
+        location:
+          type: string
+        customerId:
+          type: string
+    BranchCount:
+      type: object
+      properties:
+        customerId:
+          type: string
+        branchCount:
+          type: integer
+    BranchCountFull:
+      type: object
+      properties:
+        customerId:
+          type: string
+        name:
+          type: string
+        branchCount:
+          type: integer
