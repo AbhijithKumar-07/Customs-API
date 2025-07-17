@@ -1,0 +1,227 @@
+{
+  "info": {
+    "_postman_id": "b180cac1-2e45-4d43-9fce-ad95467bb2ac",
+    "name": "Customs-API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40680902"
+  },
+  "item": [
+    {
+      "name": "Customer Endpoints",
+      "item": [
+        {
+          "name": "➕ Add a Customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Maruti Freight Movers\",\r\n  \"email\": \"logistics@marutimovers.in\",\r\n  \"gstin\": \"07AACCM9910G1ZV\"\r\n}\r\n\r\n\r\n\r\n\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/customers",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "🔍 Get All Customers with Branches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/customers",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "🔍 Get Customer by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/customers/6878e7eddec5e339b644bab8",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers", "6878e7eddec5e339b644bab8"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✏️ Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Global Trade Inc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/customers/6878e785dec5e339b644bab4",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers", "6878e785dec5e339b644bab4"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/customers/6878e81cdec5e339b644babc",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers", "6878e81cdec5e339b644babc"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "🔢 Get Branch Count for a Specific Customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/customers/6878e830dec5e339b644babe/branch-count",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers", "6878e830dec5e339b644babe", "branch-count"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "📊 Get All Customers with Branch Counts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/customers/branch-counts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["customers", "branch-counts"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Branch Endpoints",
+      "item": [
+        {
+          "name": "➕ Add a Branch",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"branch_code\": \"MAR-VAD-01\",\r\n  \"location\": \"Vadodara\",\r\n  \"customerId\": \"6878e830dec5e339b644babe\"\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/branches",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["branches"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "🔍 Get Branches by Customer ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/branches?customerId=6878e7dddec5e339b644bab6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["branches"],
+              "query": [
+                {
+                  "key": "customerId",
+                  "value": "6878e7dddec5e339b644bab6"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✏️ Update Branch",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"location\": \"Chennai Updated\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/branches/6878f054dec5e339b644bad0",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["branches", "6878f054dec5e339b644bad0"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Delete Branch",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/branches/6878f2abdec5e339b644bae8",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["branches", "6878f2abdec5e339b644bae8"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
