@@ -91,6 +91,14 @@ customs-api/
 2. Select this JSON file
 3. Run requests against http://localhost:5000
 
+## 🗺️ ERD Diagram
+
+**This MongoDB-based ERD shows the relationship between customers and their branches.**
+
+View the interactive ERD:  
+👉 [Click to view on dbdiagram.io](https://dbdiagram.io/d/Customs-API-68792dc9f413ba35086b9686)
+
+
 ## 🔗 Endpoints Reference
 
 **Customers**
